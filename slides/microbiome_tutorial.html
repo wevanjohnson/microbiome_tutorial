@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="W. Evan Johnson" />
+
+<meta name="date" content="2018-10-15" />
+
+<title>Microbiome Data Tutorial</title>
+
+<script src="microbiome_tutorial_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="microbiome_tutorial_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="microbiome_tutorial_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="microbiome_tutorial_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="microbiome_tutorial_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="microbiome_tutorial_files/navigation-1.1/tabsets.js"></script>
+<link href="microbiome_tutorial_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="microbiome_tutorial_files/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Microbiome Data Tutorial</h1>
+<h4 class="author">W. Evan Johnson</h4>
+<h4 class="date">10/15/2018</h4>
+
+</div>
+
+
+<div id="introduction-to-the-terminal" class="section level2 tabset">
+<h2>Introduction to the terminal</h2>
+<p>Understanding how to use the terminal is a crucial skill needed for conducting bioinformatics analyses. Many programs are newly developed by sciencists, not programmers, so using ‘less-refined’ software packages and tools is a requirement. So a basic understanding of Unix is necessary.</p>
+<div id="basic-unix-commands" class="section level3">
+<h3>Basic unix commands</h3>
+<pre class="bash"><code>pwd
+cd ~/github/microbiome_tutorial/
+ls
+cd fastq_data
+ls
+cd ..
+cp combined.fasta combined2.fasta
+mv  combined2.fasta genome/
+cd genome
+rm combined2.fasta
+less combined.fasta #tab completion
+less -S combined.fasta #tab completion</code></pre>
+</div>
+<div id="get-started" class="section level3">
+<h3>Get started</h3>
+<pre class="bash"><code># Make a new directory with your name
+cd ~/Desktop/microbiome_tutorial/
+mkdir results</code></pre>
+</div>
+</div>
+<div id="read-quality-control-and-trimming" class="section level2 tabset">
+<h2>Read quality control and trimming</h2>
+<div id="fastqc-example" class="section level3">
+<h3>FASTQC example</h3>
+<p>FASTQC (<a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/" class="uri">https://www.bioinformatics.babraham.ac.uk/projects/fastqc/</a>) is a great tool for summarizing evaluating your data from a .Fastq file. Quoting their website:</p>
+<p>“FastQC aims to provide a simple way to do some quality control checks on raw sequence data coming from high throughput sequencing pipelines. It provides a modular set of analyses which you can use to give a quick impression of whether your data has any problems of which you should be aware before doing any further analysis.”</p>
+<p>The main functions of FastQC are: 1. Import of data from BAM, SAM or FastQ files (any variant); 2. Providing a quick overview to tell you in which areas there may be problems; 3. Summary graphs and tables to quickly assess your data; 4. Export of results to an HTML based permanent report; 5. Offline operation to allow automated generation of reports without running the interactive application&quot;</p>
+<p>Here is a simple example on how to run FASTQC on one or more files!</p>
+<pre class="bash"><code>## Run a single files
+./software/FastQC/fastqc fastq_data/SRR1204622.trim.fastq.gz
+
+## Run all the files
+./software/FastQC/fastqc fastq_data/SRR*.trim.fastq.gz</code></pre>
+</div>
+<div id="mutltiqc" class="section level3">
+<h3>MutltiQC</h3>
+<p>MultiQC (<a href="https://multiqc.info" class="uri">https://multiqc.info</a>) is the best way to summarize multiple FASTQC result files at the same time. However, I am not giving you an example here, because it can’t be simply installed in this folder, and unfortunately, I don’t know how to use it :-), my students always just do this for me ;-).</p>
+</div>
+<div id="trimmomatic-example" class="section level3">
+<h3>Trimmomatic example</h3>
+<p>Trimmomatic (<a href="http://www.usadellab.org/cms/?page=trimmomatic" class="uri">http://www.usadellab.org/cms/?page=trimmomatic</a>) is a simple Java based tool for QC and trimming your sequencing reads. Below is an example for single end reads (SE; compared to paired end PE), PRED33 encoding (-pred33), triming the tails of low quality reads with a sliding window of size 4 with an average PHRED score of 20 (SLIDINGWINDOW:4:20)–when a window of 4 bases has an average score &lt;20 it trims the rest of the read, trimming the first 3 bases (LEADING:3) and last 3 bases (TRAILING:3) of the read, and removing any reads shorter than 36 bases (MINLEN:36).</p>
+<pre class="bash"><code>java -jar software/Trimmomatic-0.36/trimmomatic-0.36.jar SE -phred33 fastq_data/SRR1204622.fastq fastq_data/SRR1204622.trim.fastq SLIDINGWINDOW:4:20 LEADING:3 TRAILING:3 MINLEN:36</code></pre>
+</div>
+</div>
+<div id="downloading-a-reference-genome-library-in-r" class="section level2 tabset">
+<h2>Downloading a reference genome library in R</h2>
+<p>Using our MetaScope package tools!</p>
+<div id="installation" class="section level3">
+<h3>Installation</h3>
+<pre class="r"><code>install.packages(&quot;devtools&quot;)
+devtools::install_github(&quot;compbiomed/MetaScope&quot;)</code></pre>
+</div>
+<div id="download-all-refseq-reference-bacterial-genomes" class="section level3">
+<h3>Download all RefSeq reference bacterial genomes</h3>
+<pre class="r"><code>library(&quot;MetaScope&quot;)
+download_refseq(&#39;bacteria&#39;)</code></pre>
+</div>
+<div id="download-all-refseq-representative-viral-genomes" class="section level3">
+<h3>Download all RefSeq representative viral genomes</h3>
+<pre class="r"><code>library(&quot;MetaScope&quot;)
+download_refseq( &#39;viral&#39;, representative = TRUE )</code></pre>
+</div>
+<div id="download-all-refseq-viral-genomes" class="section level3">
+<h3>Download all RefSeq viral genomes</h3>
+<pre class="r"><code>library(&quot;MetaScope&quot;)
+download_refseq( &#39;viral&#39;, reference = FALSE ) </code></pre>
+</div>
+</div>
+<div id="running-pathoscope" class="section level2">
+<h2>Running PathoScope</h2>
+<p>Here is a detailed look at the PathoScope workflow:</p>
+<p><img src="microbiome_tutorial_figures/Pathoscope2_Overview.pdf" alt="PathoScope Workflow Figure"></p>
+<p>####Set up a Unix/Mac shortcut for Pathoscope</p>
+<pre class="bash"><code># make an alias for Pathoscope
+alias pathoscope=&quot;~/Desktop/microbiome_tutorial/software/pathoscope2/pathoscope/pathoscope.py&quot;
+
+# start in the tutorial directory
+cd ~/Desktop/microbiome_tutorial/</code></pre>
+</div>
+<div id="aligning-to-the-reference-genome-with-pathomap" class="section level2 tabset">
+<h2>Aligning to the reference genome with PathoMAP</h2>
+<p>USAGE: pathoscope MAP -U $readfile -indexDir $indDir -targetRefFiles $index_fna -expTag $sample -outDir $outDir -btHome $bthome</p>
+<p>Here is the PathoMAP workflow:</p>
+<p><img src="microbiome_tutorial_figures/Pathoscope2_PathoMap.pdf" alt="PathoMap Workflow Figure"></p>
+<div id="pathoscope-reference-genome-format" class="section level3">
+<h3>PathoScope reference genome format</h3>
+<pre class="bash"><code>less -S genome/combined.fasta
+less -S genome/combined_pathoscope.fasta</code></pre>
+</div>
+<div id="format-for-pathomap" class="section level3">
+<h3>Format for PathoMAP</h3>
+<p>Only needed if you don’t already have a PathoScope formatted .fastq file</p>
+<pre class="r"><code>library(Biostrings)
+## Function to format genome libraries for PathoScope
+format_pathoscope=function(ref_lib){
+  ref = readDNAStringSet(ref_lib)
+  accession=NULL; fullname=NULL; taxid=NULL
+  for (i in strsplit(names(ref),&#39; &#39;)){
+    accession=c(accession,i[1])
+    fullname=c(fullname,paste(i[-1],collapse=&#39;_&#39;))
+    if(paste(&quot;doc_&quot;,i[2],&quot;_&quot;,i[3],&quot;_db_refseq.tsv&quot;,sep=&#39;&#39;) %in% allfiles){taxid=c(taxid,read.table(paste(&quot;doc_&quot;,i[2],&quot;_&quot;,i[3],&quot;_db_refseq.tsv&quot;,sep=&#39;&#39;),header=T,sep=&quot;\t&quot;)$taxid)}else{taxid=c(taxid,99999)}
+  }
+  names(ref)=paste(&quot;ti|&quot;,taxid,&quot;|accession|&quot;,accession,&quot;|org|&quot;,fullname,sep=&#39;&#39;)
+  writeXStringSet(ref, paste(&quot;pathoscope_&quot;,ref_lib,sep=&#39;&#39;))
+}
+
+#setwd(&quot;~/Desktop/microbiome_tutorial/genome_test/&quot;)
+#format_pathoscope(&quot;fasta/Staphylococcus_epidermidis_genomic_refseq.fna&quot;)
+#format_pathoscope(&quot;combined.fasta&quot;)</code></pre>
+</div>
+<div id="aligning-to-bacterial-genomes" class="section level3">
+<h3>Aligning to bacterial genomes</h3>
+<pre class="bash"><code>pathoscope MAP --help
+
+bthome=~/Desktop/microbiome_tutorial/software/bowtie2-2.1.0  # bowtie2 home directory
+outDir=~/Desktop/microbiome_tutorial/results # set output to your home directory
+sample=sample_622 # name the sample
+reads=~/Desktop/microbiome_tutorial/fastq_data/SRR1204622.trim.fastq.gz  # read file
+indDir=~/Desktop/microbiome_tutorial/genome/bowtie_bacteria_small # reference library location
+index_fna=~/Desktop/microbiome_tutorial/genome/bowtie_bacteria_small/combined_pathoscope.fasta # reference fasta location
+
+echo $bthome # print variables
+echo $reads
+less -S $reads
+
+# Run PathoMap: small index
+pathoscope MAP -U $reads -indexDir $indDir -targetRefFiles $index_fna -expTag $sample -outDir $outDir -btHome $bthome
+
+# Output in .sam file
+less -S evan/outalign.sam</code></pre>
+</div>
+</div>
+<div id="removing-ambiguity-with-pathoid" class="section level2 tabset">
+<h2>Removing ambiguity with PathoID</h2>
+<p>USAGE: pathoscope ID -alignFile $outalign.sam -outDir $outDir -expTag $sample</p>
+<p>We use a Bayesian mixture modeling approach to remove abiguity in read mapping:</p>
+<p><img src="microbiome_tutorial_figures/PathoID.jpg" alt="PathoID Workflow Figure"></p>
+<div id="estimating-the-proportions-of-reads-to-each-bacteria" class="section level4">
+<h4>Estimating the proportions of reads to each bacteria</h4>
+<pre class="bash"><code>pathoscope ID --help
+
+outDir=~/Desktop/microbiome_tutorial/results # set output to your home directory
+sample=sample_622 # name the sample
+
+# Run PathoID to simmarize sam file 
+pathoscope ID -alignFile $outDir/outalign.sam -outDir $outDir -expTag $sample --noUpdatedAlignFile </code></pre>
+</div>
+</div>
+<div id="running-pathoscope-on-a-cluster" class="section level2">
+<h2>Running Pathoscope on a cluster</h2>
+<p>####Running multiple jobs on SCC (batch)</p>
+<pre class="bash"><code>#!/bin/bash -l
+
+# Set SCC project
+#$ -P johnsonlab
+
+# Specify hard time limit for the job. 
+#   The job will be aborted if it runs longer than this time.
+#   The default time is 12 hours
+#$ -l h_rt=12:00:00
+
+# Send an email when the job finishes or if it is aborted (by default no email is sent).
+#$ -m ae
+
+# Give job a name
+#$ -N TB_biomarker
+
+# Request eight cores
+#$ -pe omp 8
+
+# Combine output and error files into a single file
+#$ -j y
+
+# Specify the output file name
+#$ -o TB_biomarker.qlog
+
+# Submit an array job with n tasks
+#$ -t 1-60
+
+# Use the SGE_TASK_ID environment variable to select the appropriate input file from bash array
+# Bash array index starts from 0, so we need to subtract one from SGE_TASK_ID value
+inputs=(*_tmp&quot;/&quot;)
+index=$(($SGE_TASK_ID-1))
+taskinput=${inputs[$index]}
+
+# Keep track of information related to the current job
+echo &quot;==========================================================&quot;
+echo &quot;Start date : $(date)&quot;
+echo &quot;Job name : $JOB_NAME&quot;
+echo &quot;Job ID : $SGE_TASK_ID&quot;
+echo &quot;==========================================================&quot;
+
+module load bowtie2/2.3.2
+module load python/2.7.13
+pathoscope=&quot;/restricted/projectnb/pathoscope/code/PathoScope/pathoscope/pathoscope2.py&quot;
+
+dataDir=$taskinput
+reads1=$dataDir*.fastq
+eTag=${taskinput:0:10} 
+indDir=&quot;/restricted/projectnb/pathoscope/reflib/index&quot;
+targLibs=&quot;bacteria_ti_0,bacteria_ti_1,fungi_nt_ti&quot;
+
+$pathoscope MAP -U $reads1 -indexDir $indDir -targetIndexPrefixes $targLibs -expTag $eTag -outDir $dataDir
+
+rm $dataDir$eTag*.sam
+
+$pathoscope ID -expTag $eTag -alignFile $dataDir&quot;outalign.sam&quot; --noUpdatedAlignFile -outDir $dataDir</code></pre>
+</div>
+<div id="animalcules-analysis-and-visualization" class="section level2 tabset">
+<h2>animalcules analysis and visualization</h2>
+<p>Screenshot examples of PathoStat: <img src="microbiome_tutorial_figures/pathostat1.png" alt="PathoStat Examples"> <img src="microbiome_tutorial_figures/pathostat2.png" alt="PathoID Examples"></p>
+<div id="view-pathoscope-results" class="section level3">
+<h3>View PathoScope results</h3>
+<pre class="bash"><code>outDir=~/Desktop/microbiome_tutorial/results # set output to your home directory
+
+cd $outDir 
+
+less -S $outDir/sample_622-sam-report.tsv</code></pre>
+</div>
+<div id="install-animalcules" class="section level3">
+<h3>Install animalcules</h3>
+<pre class="r"><code>### Bioconductor version
+if (!requireNamespace(&quot;BiocManager&quot;, quietly = TRUE))
+    install.packages(&quot;BiocManager&quot;)
+BiocManager::install(&quot;animalcules&quot;)
+
+### For the latest updates (USE THIS ONE!)
+devtools::install_github(&quot;compbiomed/animalcules&quot;)</code></pre>
+</div>
+<div id="run-animalcules-interactively" class="section level3">
+<h3>Run animalcules interactively</h3>
+<pre class="r"><code>library(PathoStat)
+run_animalcules()</code></pre>
+</div>
+</div>
+<div id="section" class="section level2">
+<h2></h2>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

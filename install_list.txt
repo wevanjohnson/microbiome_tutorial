@@ -1,0 +1,13 @@
+install list: 
+
+Java Runtime Environment (https://www.java.com/en/)
+
+R (most recent version, >3.5) 
+Rstudio (most recent)
+
+The following R packages:
+source("https://bioconductor.org/biocLite.R")
+biocLite(c("devtools", "PathoStat","singleCellTK"))
+devtools::install_github("compbiomed/PathoStat")
+devtools::install_github("compbiomed/singleCellTK")
+
