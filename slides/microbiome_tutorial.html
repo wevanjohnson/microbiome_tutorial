@@ -273,7 +273,7 @@ download_refseq( &#39;viral&#39;, reference = FALSE ) </code></pre>
 <div id="running-pathoscope" class="section level2">
 <h2>Running PathoScope</h2>
 <p>Here is a detailed look at the PathoScope workflow:</p>
-<p><img src="microbiome_tutorial_figures/Pathoscope2_Overview.pdf" alt="PathoScope Workflow Figure"></p>
+<p><img src="microbiome_tutorial_figures/Pathoscope2_Overview.png" alt="PathoScope Workflow Figure"></p>
 <p>####Set up a Unix/Mac shortcut for Pathoscope</p>
 <pre class="bash"><code># make an alias for Pathoscope
 alias pathoscope=&quot;~/Desktop/microbiome_tutorial/software/pathoscope2/pathoscope/pathoscope.py&quot;
@@ -285,7 +285,7 @@ cd ~/Desktop/microbiome_tutorial/</code></pre>
 <h2>Aligning to the reference genome with PathoMAP</h2>
 <p>USAGE: pathoscope MAP -U $readfile -indexDir $indDir -targetRefFiles $index_fna -expTag $sample -outDir $outDir -btHome $bthome</p>
 <p>Here is the PathoMAP workflow:</p>
-<p><img src="microbiome_tutorial_figures/Pathoscope2_PathoMap.pdf" alt="PathoMap Workflow Figure"></p>
+<p><img src="microbiome_tutorial_figures/Pathoscope2_PathoMap.png" alt="PathoMap Workflow Figure"></p>
 <div id="pathoscope-reference-genome-format" class="section level3">
 <h3>PathoScope reference genome format</h3>
 <pre class="bash"><code>less -S genome/combined.fasta
@@ -433,7 +433,7 @@ devtools::install_github(&quot;compbiomed/animalcules&quot;)</code></pre>
 </div>
 <div id="run-animalcules-interactively" class="section level3">
 <h3>Run animalcules interactively</h3>
-<pre class="r"><code>library(PathoStat)
+<pre class="r"><code>library(animalcules)
 run_animalcules()</code></pre>
 </div>
 </div>

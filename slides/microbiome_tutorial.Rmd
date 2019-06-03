@@ -97,7 +97,7 @@ download_refseq( 'viral', reference = FALSE )
 ## Running PathoScope
 Here is a detailed look at the PathoScope workflow:
 
-<img src="microbiome_tutorial_figures/Pathoscope2_Overview.pdf" alt="PathoScope Workflow Figure">
+<img src="microbiome_tutorial_figures/Pathoscope2_Overview.png" alt="PathoScope Workflow Figure">
 
 ####Set up a Unix/Mac shortcut for Pathoscope
 ```{r engine='bash', eval=FALSE}
@@ -113,7 +113,7 @@ USAGE: pathoscope MAP -U $readfile -indexDir $indDir -targetRefFiles $index_fna 
 
 Here is the PathoMAP workflow:
 
-<img src="microbiome_tutorial_figures/Pathoscope2_PathoMap.pdf" alt="PathoMap Workflow Figure">
+<img src="microbiome_tutorial_figures/Pathoscope2_PathoMap.png" alt="PathoMap Workflow Figure">
 
 
 ### PathoScope reference genome format
@@ -275,7 +275,7 @@ devtools::install_github("compbiomed/animalcules")
 
 ### Run animalcules interactively
 ```{r, eval=FALSE}
-library(PathoStat)
+library(animalcules)
 run_animalcules()
 ```
 ##
